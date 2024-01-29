@@ -44,7 +44,7 @@
     </div>
 </div>
 
-@if($authMethod === 'standard')
+@if($authMethod === 'standard' or $authMethod === 'truesight')
     <div component="new-user-password">
         <label class="setting-list-label">{{ trans('settings.users_password') }}</label>
 
@@ -55,7 +55,7 @@
 
             @include('form.toggle-switch', [
                 'name' => 'send_invite',
-                'value' => old('send_invite', 'true') === 'true',
+                'value' => old('send_invite', 'false') === 'true',
                 'label' => trans('settings.users_send_invite_option')
             ])
         @endif

@@ -31,6 +31,10 @@ return [
     // mechanisms used by this application to persist your user's data.
     // Supported drivers: "session", "api-token", "ldap-session", "async-external-session"
     'guards' => [
+        'truesight' => [
+            'driver'   => 'ts-devops',
+            'provider' => 'users',
+        ],
         'standard' => [
             'driver'   => 'session',
             'provider' => 'users',

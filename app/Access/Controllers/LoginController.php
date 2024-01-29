@@ -21,8 +21,8 @@ class LoginController extends Controller
         protected LoginService $loginService,
     ) {
         $this->middleware('guest', ['only' => ['getLogin', 'login']]);
-        $this->middleware('guard:standard,ldap', ['only' => ['login']]);
-        $this->middleware('guard:standard,ldap,oidc', ['only' => ['logout']]);
+        $this->middleware('guard:standard,truesight,ldap', ['only' => ['login']]);
+        $this->middleware('guard:standard,truesight,ldap,oidc', ['only' => ['logout']]);
     }
 
     /**

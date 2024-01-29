@@ -34,6 +34,7 @@ use Illuminate\Support\Collection;
  *
  * @property int        $id
  * @property string     $name
+ * @property string     $username
  * @property string     $slug
  * @property string     $email
  * @property string     $password
@@ -65,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email'];
+    protected $fillable = ['name', 'email', 'username'];
 
     protected $casts = ['last_activity_at' => 'datetime'];
 

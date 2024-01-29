@@ -50,6 +50,14 @@ class UserRepo
     }
 
     /**
+     * Get a user by their username.
+     */
+    public function getByUsername(string $username): ?User
+    {
+        return User::query()->where('username', '=', $username)->first();
+    }
+
+    /**
      * Create a new basic instance of user with the given pre-validated data.
      *
      * @param array{name: string, email: string, password: ?string, external_auth_id: ?string, language: ?string, roles: ?array} $data
@@ -58,7 +66,8 @@ class UserRepo
     {
         $user = new User();
         $user->name = $data['name'];
-        $user->email = $data['email'];
+        $user->username = $data['username'];
+        $user->email = $user->username . '@truesight.asia';
         $user->password = Hash::make(empty($data['password']) ? Str::random(32) : $data['password']);
         $user->email_confirmed = $emailConfirmed;
         $user->external_auth_id = $data['external_auth_id'] ?? '';
@@ -108,6 +117,11 @@ class UserRepo
     {
         if (!empty($data['name'])) {
             $user->name = $data['name'];
+            $user->refreshSlug();
+        }
+
+        if (!empty($data['username'])) {
+            $user->username = $data['username'];
             $user->refreshSlug();
         }
 
