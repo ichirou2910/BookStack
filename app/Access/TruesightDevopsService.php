@@ -31,7 +31,7 @@ class TruesightDevopsService
     protected $httpClient;
 
     /**
-     * TruesightDevopsSessionGuard constructor.
+     * TruesightDevopsService constructor.
      * @param mixed $devops_host
      * @param mixed $devops_domain
      */
@@ -44,6 +44,9 @@ class TruesightDevopsService
 
     public function getInfo(string $username, string $password): ?DevopsUser
     {
+        if ($this->devops_host == '' || $this->devops_domain == '') {
+            return null;
+        }
         try {
             $response = $this->httpClient->get($this->devops_host . '/_api/_common/GetUserProfile?__v=5', [
                 RequestOptions::AUTH => [
