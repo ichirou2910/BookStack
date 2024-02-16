@@ -475,8 +475,19 @@ class PageController extends Controller
         $this->checkOwnablePermission('page-update', $page);
 
         $path = $request->get('public_path', null);
-        if ($path === null || $path === '') {
-            return redirect($page->getUrl());
+        // Trim the leading "/"
+        if (strpos($path, '/') === 0) {
+            $path = substr($path, 1);
+        }
+
+        $old_page = $this->pageRepo->getByPublicPath($path);
+        if (!is_null($old_page) && $old_page->id != $page->id) {
+            $this->showErrorNotification(trans('errors.page_public_path_exists'));
+            return redirect($page->getUrl('/public'));
+        }
+        if (empty($path) || !preg_match('/^[a-zA-Z0-9\-\/]+$/', $path)) {
+            $this->showErrorNotification(trans('errors.page_public_path_invalid'));
+            return redirect($page->getUrl('/public'));
         }
 
         try {

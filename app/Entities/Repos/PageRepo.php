@@ -83,7 +83,7 @@ class PageRepo
         $page = Page::visible()->where('public_path', '=', $public_path)->first();
 
         if (!$page) {
-            throw new NotFoundException(trans('errors.page_not_found'));
+            return null;
         }
 
         return $page;

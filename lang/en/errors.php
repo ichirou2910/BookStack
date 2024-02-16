@@ -66,6 +66,8 @@ return [
     'page_draft_autosave_fail' => 'Failed to save draft. Ensure you have internet connection before saving this page',
     'page_draft_delete_fail' => 'Failed to delete page draft and fetch current page saved content',
     'page_custom_home_deletion' => 'Cannot delete a page while it is set as a homepage',
+    'page_public_path_exist' => 'Public path assigned to other page',
+    'page_public_path_invalid' => 'Not a valid URL Path',
 
     // Entities
     'entity_not_found' => 'Entity not found',
