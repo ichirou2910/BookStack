@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->string('public_path')->nullable();
+            //
         });
     }
 
