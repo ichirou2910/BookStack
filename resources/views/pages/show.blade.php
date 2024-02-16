@@ -165,6 +165,10 @@
 	                    <span>{{ trans('common.move') }}</span>
 	                </a>
                 @endif
+                <a href="{{ $page->getUrl('/public') }}" data-shortcut="public" class="icon-list-item">
+                    <span>@icon('export')</span>
+                    <span>{{ trans('common.public') }}</span>
+                </a>
             @endif
             <a href="{{ $page->getUrl('/revisions') }}" data-shortcut="revisions" class="icon-list-item">
                 <span>@icon('history')</span>
