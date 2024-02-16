@@ -166,7 +166,7 @@
 	                </a>
                 @endif
                 <a href="{{ $page->getUrl('/public') }}" data-shortcut="public" class="icon-list-item">
-                    <span>@icon('export')</span>
+                    <span>@icon('users')</span>
                     <span>{{ trans('common.public') }}</span>
                 </a>
             @endif
@@ -197,6 +197,12 @@
             @endif
             @if(userCan('content-export'))
                 @include('entities.export-menu', ['entity' => $page])
+            @endif
+            @if($page->public_path != null)
+                <a href="{{ '/public/' . $page->public_path }}" data-shortcut="delete" class="icon-list-item">
+                    <span>@icon('users')</span>
+                    <span>Public View</span>
+                </a>
             @endif
         </div>
 
