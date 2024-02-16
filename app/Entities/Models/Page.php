@@ -27,13 +27,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Collection   $attachments
  * @property Collection   $revisions
  * @property PageRevision $currentRevision
+ * @property string       $public_path
  */
 class Page extends BookChild
 {
     use HasFactory;
 
-    public static $listAttributes = ['name', 'id', 'slug', 'book_id', 'chapter_id', 'draft', 'template', 'text', 'created_at', 'updated_at', 'priority'];
-    public static $contentAttributes = ['name', 'id', 'slug', 'book_id', 'chapter_id', 'draft', 'template', 'html', 'text', 'created_at', 'updated_at', 'priority'];
+    public static $listAttributes = ['name', 'id', 'slug', 'book_id', 'chapter_id', 'draft', 'template', 'text', 'created_at', 'updated_at', 'priority', 'public_path'];
+    public static $contentAttributes = ['name', 'id', 'slug', 'book_id', 'chapter_id', 'draft', 'template', 'html', 'text', 'created_at', 'updated_at', 'priority', 'public_path'];
 
     protected $fillable = ['name', 'priority'];
 

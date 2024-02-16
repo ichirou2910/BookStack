@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Common elements found throughout many areas of BookStack.
  */
+
 return [
 
     // Buttons
@@ -32,6 +34,7 @@ return [
     'edit' => 'Edit',
     'sort' => 'Sort',
     'move' => 'Move',
+    'public' => 'Public',
     'copy' => 'Copy',
     'reply' => 'Reply',
     'delete' => 'Delete',

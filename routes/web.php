@@ -90,6 +90,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/{bookSlug}/page/{pageSlug}/edit', [EntityControllers\PageController::class, 'edit']);
     Route::get('/books/{bookSlug}/page/{pageSlug}/move', [EntityControllers\PageController::class, 'showMove']);
     Route::put('/books/{bookSlug}/page/{pageSlug}/move', [EntityControllers\PageController::class, 'move']);
+    Route::get('/books/{bookSlug}/page/{pageSlug}/public', [EntityControllers\PageController::class, 'showPublic']);
+    Route::put('/books/{bookSlug}/page/{pageSlug}/public', [EntityControllers\PageController::class, 'public']);
     Route::get('/books/{bookSlug}/page/{pageSlug}/copy', [EntityControllers\PageController::class, 'showCopy']);
     Route::post('/books/{bookSlug}/page/{pageSlug}/copy', [EntityControllers\PageController::class, 'copy']);
     Route::get('/books/{bookSlug}/page/{pageSlug}/delete', [EntityControllers\PageController::class, 'showDelete']);
@@ -100,6 +102,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/books/{bookSlug}/page/{pageSlug}', [EntityControllers\PageController::class, 'update']);
     Route::delete('/books/{bookSlug}/page/{pageSlug}', [EntityControllers\PageController::class, 'destroy']);
     Route::delete('/books/{bookSlug}/draft/{pageId}', [EntityControllers\PageController::class, 'destroyDraft']);
+
+    // Public pages
+    Route::get('/public/{path}', [EntityControllers\PublicController::class, 'show'])
+        ->where('path', '.*$');
 
     // Revisions
     Route::get('/books/{bookSlug}/page/{pageSlug}/revisions', [EntityControllers\PageRevisionController::class, 'index']);

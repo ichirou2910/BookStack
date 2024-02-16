@@ -446,4 +446,45 @@ class PageController extends Controller
 
         return redirect($pageCopy->getUrl());
     }
+
+    /**
+     * Show the view to assign a public path to a page
+     *
+     * @throws NotFoundException
+     */
+    public function showPublic(string $bookSlug, string $pageSlug)
+    {
+        $page = $this->pageRepo->getBySlug($bookSlug, $pageSlug);
+        $this->checkOwnablePermission('page-update', $page);
+
+        return view('pages.public', [
+            'book' => $page->book,
+            'page' => $page,
+        ]);
+    }
+
+    /**
+     * Assign a public path to a page
+     *
+     * @throws NotFoundException
+     * @throws Throwable
+     */
+    public function public(Request $request, string $bookSlug, string $pageSlug)
+    {
+        $page = $this->pageRepo->getBySlug($bookSlug, $pageSlug);
+        $this->checkOwnablePermission('page-update', $page);
+
+        $path = $request->get('public_path', null);
+        if ($path === null || $path === '') {
+            return redirect($page->getUrl());
+        }
+
+        try {
+            $this->pageRepo->public($page, $path);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+
+        return redirect($page->getUrl());
+    }
 }

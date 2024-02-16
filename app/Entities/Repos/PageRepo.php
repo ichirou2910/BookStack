@@ -76,6 +76,20 @@ class PageRepo
     }
 
     /**
+     * Get a page by its public path
+     */
+    public function getByPublicPath(string $public_path): ?Page
+    {
+        $page = Page::visible()->where('public_path', '=', $public_path)->first();
+
+        if (!$page) {
+            throw new NotFoundException(trans('errors.page_not_found'));
+        }
+
+        return $page;
+    }
+
+    /**
      * Get pages that have been marked as a template.
      */
     public function getTemplates(int $count = 10, int $page = 1, string $search = ''): LengthAwarePaginator
@@ -200,6 +214,16 @@ class PageRepo
 
         Activity::add(ActivityType::PAGE_UPDATE, $page);
 
+        return $page;
+    }
+
+    /**
+     * Update a page in the system.
+     */
+    public function public(Page $page, string $path): Page
+    {
+        $page->public_path = $path;
+        $page->save();
         return $page;
     }
 

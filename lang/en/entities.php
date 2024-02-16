@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Text used for 'Entities' (Document Structure Elements) such as
  * Books, Shelves, Chapters & Pages
  */
+
 return [
 
     // Shared
@@ -248,6 +250,7 @@ return [
     'pages_not_in_chapter' => 'Page is not in a chapter',
     'pages_move' => 'Move Page',
     'pages_copy' => 'Copy Page',
+    'pages_public' => 'Public Page',
     'pages_copy_desination' => 'Copy Destination',
     'pages_copy_success' => 'Page successfully copied',
     'pages_permissions' => 'Page Permissions',
