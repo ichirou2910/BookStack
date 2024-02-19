@@ -1,48 +1,48 @@
-import {register as registerShortcuts} from './shortcuts';
-import {listen as listenForCommonEvents} from './common-events';
-import {scrollToQueryString} from './scrolling';
-import {listenForDragAndPaste} from './drop-paste-handling';
-import {getPrimaryToolbar, registerAdditionalToolbars} from './toolbars';
-import {registerCustomIcons} from './icons';
-import {setupFilters} from './filters';
+import { register as registerShortcuts } from './shortcuts';
+import { listen as listenForCommonEvents } from './common-events';
+import { scrollToQueryString } from './scrolling';
+import { listenForDragAndPaste } from './drop-paste-handling';
+import { getPrimaryToolbar, registerAdditionalToolbars } from './toolbars';
+import { registerCustomIcons } from './icons';
+import { setupFilters } from './filters';
 
-import {getPlugin as getCodeeditorPlugin} from './plugin-codeeditor';
-import {getPlugin as getDrawioPlugin} from './plugin-drawio';
-import {getPlugin as getCustomhrPlugin} from './plugins-customhr';
-import {getPlugin as getImagemanagerPlugin} from './plugins-imagemanager';
-import {getPlugin as getAboutPlugin} from './plugins-about';
-import {getPlugin as getDetailsPlugin} from './plugins-details';
-import {getPlugin as getTasklistPlugin} from './plugins-tasklist';
-import {handleEmbedAlignmentChanges} from './fixes';
+import { getPlugin as getCodeeditorPlugin } from './plugin-codeeditor';
+import { getPlugin as getDrawioPlugin } from './plugin-drawio';
+import { getPlugin as getCustomhrPlugin } from './plugins-customhr';
+import { getPlugin as getImagemanagerPlugin } from './plugins-imagemanager';
+import { getPlugin as getAboutPlugin } from './plugins-about';
+import { getPlugin as getDetailsPlugin } from './plugins-details';
+import { getPlugin as getTasklistPlugin } from './plugins-tasklist';
+import { handleEmbedAlignmentChanges } from './fixes';
 
 const styleFormats = [
-    {title: 'Large Header', format: 'h2', preview: 'color: blue;'},
-    {title: 'Medium Header', format: 'h3'},
-    {title: 'Small Header', format: 'h4'},
-    {title: 'Tiny Header', format: 'h5'},
+    { title: 'Large Header', format: 'h2', preview: 'color: blue;' },
+    { title: 'Medium Header', format: 'h3' },
+    { title: 'Small Header', format: 'h4' },
+    { title: 'Tiny Header', format: 'h5' },
     {
         title: 'Paragraph', format: 'p', exact: true, classes: '',
     },
-    {title: 'Blockquote', format: 'blockquote'},
+    { title: 'Blockquote', format: 'blockquote' },
     {
         title: 'Callouts',
         items: [
-            {title: 'Information', format: 'calloutinfo'},
-            {title: 'Success', format: 'calloutsuccess'},
-            {title: 'Warning', format: 'calloutwarning'},
-            {title: 'Danger', format: 'calloutdanger'},
+            { title: 'Information', format: 'calloutinfo' },
+            { title: 'Success', format: 'calloutsuccess' },
+            { title: 'Warning', format: 'calloutwarning' },
+            { title: 'Danger', format: 'calloutdanger' },
         ],
     },
 ];
 
 const formats = {
-    alignleft: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-left'},
-    aligncenter: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-center'},
-    alignright: {selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-right'},
-    calloutsuccess: {block: 'p', exact: true, attributes: {class: 'callout success'}},
-    calloutinfo: {block: 'p', exact: true, attributes: {class: 'callout info'}},
-    calloutwarning: {block: 'p', exact: true, attributes: {class: 'callout warning'}},
-    calloutdanger: {block: 'p', exact: true, attributes: {class: 'callout danger'}},
+    alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-left' },
+    aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-center' },
+    alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img,iframe,video,span', classes: 'align-right' },
+    calloutsuccess: { block: 'p', exact: true, attributes: { class: 'callout success' } },
+    calloutinfo: { block: 'p', exact: true, attributes: { class: 'callout info' } },
+    calloutwarning: { block: 'p', exact: true, attributes: { class: 'callout warning' } },
+    calloutdanger: { block: 'p', exact: true, attributes: { class: 'callout danger' } },
 };
 
 const colorMap = [
@@ -79,7 +79,7 @@ function filePickerCallback(callback, value, meta) {
     if (meta.filetype === 'file') {
         /** @type {EntitySelectorPopup} * */
         const selector = window.$components.first('entity-selector-popup');
-        const selectionText = this.selection.getContent({format: 'text'}).trim();
+        const selectionText = this.selection.getContent({ format: 'text' }).trim();
         selector.show(entity => {
             callback(entity.link, {
                 text: entity.name,
@@ -98,7 +98,7 @@ function filePickerCallback(callback, value, meta) {
         /** @type {ImageManager} * */
         const imageManager = window.$components.first('image-manager');
         imageManager.show(image => {
-            callback(image.url, {alt: image.name});
+            callback(image.url, { alt: image.name });
         }, 'gallery');
     }
 }
@@ -186,7 +186,7 @@ function getSetupCallback(options) {
         handleEmbedAlignmentChanges(editor);
 
         // Custom handler hook
-        window.$events.emitPublic(options.containerElement, 'editor-tinymce::setup', {editor});
+        window.$events.emitPublic(options.containerElement, 'editor-tinymce::setup', { editor });
 
         // Inline code format button
         editor.ui.registry.addButton('inlinecode', {
@@ -264,9 +264,11 @@ export function buildForEditor(options) {
             '+doc-root[p|h1|h2|h3|h4|h5|h6|blockquote|code-block|div|hr]',
         ].join(','),
         plugins: gatherPlugins(options),
-        contextmenu: false,
+        contextmenu: "image",
         toolbar: getPrimaryToolbar(options),
         content_style: getContentStyle(options),
+        image_caption: true,
+        image_advtab: true,
         style_formats: styleFormats,
         style_formats_merge: false,
         media_alt_source: false,
@@ -278,7 +280,7 @@ export function buildForEditor(options) {
         color_map: colorMap,
         file_picker_callback: filePickerCallback,
         paste_preprocess(plugin, args) {
-            const {content} = args;
+            const { content } = args;
             if (content.indexOf('<img src="file://') !== -1) {
                 args.content = '';
             }
