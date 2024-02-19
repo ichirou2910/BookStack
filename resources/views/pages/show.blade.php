@@ -189,6 +189,12 @@
 
             <hr class="primary-background"/>
 
+            @if($page->public_path != null)
+                <a href="{{ '/public/' . $page->public_path }}" target="_blank" data-shortcut="delete" class="icon-list-item">
+                    <span>@icon('users')</span>
+                    <span>View Public</span>
+                </a>
+            @endif
             @if($watchOptions->canWatch() && !$watchOptions->isWatching())
                 @include('entities.watch-action', ['entity' => $page])
             @endif
@@ -197,12 +203,6 @@
             @endif
             @if(userCan('content-export'))
                 @include('entities.export-menu', ['entity' => $page])
-            @endif
-            @if($page->public_path != null)
-                <a href="{{ '/public/' . $page->public_path }}" data-shortcut="delete" class="icon-list-item">
-                    <span>@icon('users')</span>
-                    <span>Public View</span>
-                </a>
             @endif
         </div>
 
