@@ -1,7 +1,7 @@
 import {
     onChildEvent, onSelect, removeLoading, showLoading,
 } from '../services/dom';
-import {Component} from './component';
+import { Component } from './component';
 
 export class ImageManager extends Component {
 
@@ -168,7 +168,7 @@ export class ImageManager extends Component {
             filter_type: this.filter === 'all' ? null : this.filter,
         };
 
-        const {data: html} = await window.$http.get(`images/${this.type}`, params);
+        const { data: html } = await window.$http.get(`images/${this.type}`, params);
         if (params.page === 1) {
             this.listContainer.innerHTML = '';
         }
@@ -263,8 +263,8 @@ export class ImageManager extends Component {
             this.formContainer.innerHTML = '';
         }
 
-        const params = requestDelete ? {delete: true} : {};
-        const {data: formHtml} = await window.$http.get(`/images/edit/${imageId}`, params);
+        const params = requestDelete ? { delete: true } : {};
+        const { data: formHtml } = await window.$http.get(`/images/edit/${imageId}`, params);
         this.formContainer.innerHTML = formHtml;
         this.formContainerPlaceholder.setAttribute('hidden', '');
         window.$components.init(this.formContainer);

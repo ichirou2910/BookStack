@@ -1,4 +1,4 @@
-import {Clipboard} from '../services/clipboard';
+import { Clipboard } from '../services/clipboard';
 
 let wrap;
 let draggedContentEditable;
@@ -51,12 +51,16 @@ function paste(editor, options, event) {
 
             uploadImageFile(imageFile, options.pageId).then(resp => {
                 const safeName = resp.name.replace(/"/g, '');
-                const newImageHtml = `<img src="${resp.thumbs.display}" alt="${safeName}" />`;
 
-                const newEl = editor.dom.create('a', {
-                    target: '_blank',
-                    href: resp.url,
-                }, newImageHtml);
+                const newEl = editor.dom.create('figure', {
+                    class: 'image align-center',
+                    contentEditable: 'false',
+                });
+                newEl.appendChild(editor.dom.create('img', {
+                    src: resp.url,
+                    alt: safeName
+                }));
+                newEl.appendChild(editor.dom.create('figcaption', { contentEditable: 'true' }, 'Caption'));
 
                 editor.dom.replace(newEl, id);
             }).catch(err => {
@@ -94,7 +98,7 @@ function dragStart(editor) {
  * @param {DragEvent} event
  */
 function drop(editor, options, event) {
-    const {dom} = editor;
+    const { dom } = editor;
     const rng = window.tinymce.dom.RangeUtils.getCaretRangeFromPoint(
         event.clientX,
         event.clientY,

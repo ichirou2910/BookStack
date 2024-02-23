@@ -11,10 +11,10 @@ function register(editor) {
             /** @type {ImageManager} * */
             const imageManager = window.$components.first('image-manager');
             imageManager.show(image => {
-                const imageUrl = image.thumbs?.display || image.url;
-                let html = `<a href="${image.url}" target="_blank">`;
-                html += `<img src="${imageUrl}" alt="${image.name}">`;
-                html += '</a>';
+                let html = `<figure contenteditable="false" class="image align-center">`;
+                html += `<img src="${image.url}" alt="${image.name}">`;
+                html += '<figcaption contenteditable="true">Caption</figcaption';
+                html += '</figure>';
                 editor.execCommand('mceInsertContent', false, html);
             }, 'gallery');
         },
