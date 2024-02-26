@@ -13,7 +13,7 @@ function register(editor) {
             imageManager.show(image => {
                 let html = `<figure contenteditable="false" class="image align-center">`;
                 html += `<img src="${image.url}" alt="${image.name}">`;
-                html += '<figcaption contenteditable="true">Caption</figcaption';
+                html += '<figcaption contenteditable="true"></figcaption';
                 html += '</figure>';
                 editor.execCommand('mceInsertContent', false, html);
             }, 'gallery');

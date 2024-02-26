@@ -60,7 +60,7 @@ function paste(editor, options, event) {
                     src: resp.url,
                     alt: safeName
                 }));
-                newEl.appendChild(editor.dom.create('figcaption', { contentEditable: 'true' }, 'Caption'));
+                newEl.appendChild(editor.dom.create('figcaption', { contentEditable: 'true' }, ''));
 
                 editor.dom.replace(newEl, id);
             }).catch(err => {
