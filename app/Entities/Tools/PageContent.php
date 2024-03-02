@@ -21,6 +21,18 @@ use Illuminate\Support\Str;
 
 class PageContent
 {
+    const RETAIN_ID_ELEMENTS = [
+        'svg',
+        'g',
+        'symbol',
+        'line',
+        'rect',
+        'circle',
+        'path',
+        'marker',
+        'p'
+    ];
+
     public function __construct(
         protected Page $page
     ) {
@@ -54,7 +66,7 @@ class PageContent
      */
     protected function extractBase64ImagesFromHtml(string $htmlText, User $updater): string
     {
-        if (empty($htmlText) || !str_contains($htmlText, 'data:image')) {
+        if (empty($htmlText) || !str_contains($htmlText, 'data:image ')) {
             return $htmlText;
         }
 
@@ -163,8 +175,8 @@ class PageContent
         $extension = strtolower(preg_split('/[\/;]/', $dataDefinition)[1] ?? '');
 
         return [
-            'extension' => $extension,
-            'data'      => base64_decode($base64ImageData) ?: '',
+        'extension' => $extension,
+        'data'      => base64_decode($base64ImageData) ?: '',
         ];
     }
 
@@ -252,6 +264,12 @@ class PageContent
 
         // Stop if there's an existing valid id that has not already been used.
         $existingId = $element->getAttribute('id');
+
+        // SVGs use ids for styling so don't replace it
+        if (in_array($element->nodeName, self::RETAIN_ID_ELEMENTS)) {
+            return ['', ''];
+        }
+
         if (str_starts_with($existingId, 'bkmrk') && !isset($idMap[$existingId])) {
             $idMap[$existingId] = true;
 
@@ -378,10 +396,10 @@ class PageContent
             $text = mb_substr($text, 0, 100);
 
             return [
-                'nodeName' => strtolower($header->nodeName),
-                'level'    => intval(str_replace('h', '', $header->nodeName)),
-                'link'     => '#' . $header->getAttribute('id'),
-                'text'     => $text,
+            'nodeName' => strtolower($header->nodeName),
+            'level'    => intval(str_replace('h', '', $header->nodeName)),
+            'link'     => '#' . $header->getAttribute('id'),
+            'text'     => $text,
             ];
         })->filter(function ($header) {
             return mb_strlen($header['text']) > 0;

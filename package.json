@@ -49,6 +49,8 @@
     "idb-keyval": "^6.2.1",
     "markdown-it": "^13.0.2",
     "markdown-it-task-lists": "^2.1.1",
+    "mermaid": "9.4.3",
+    "pako": "^2.1.0",
     "snabbdom": "^3.5.1",
     "sortablejs": "^1.15.1"
   },

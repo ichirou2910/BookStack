@@ -7,6 +7,7 @@ import { registerCustomIcons } from './icons';
 import { setupFilters } from './filters';
 
 import { getPlugin as getCodeeditorPlugin } from './plugin-codeeditor';
+import { getPlugin as getMermaidPlugin } from './plugin-mermaid';
 import { getPlugin as getDrawioPlugin } from './plugin-drawio';
 import { getPlugin as getCustomhrPlugin } from './plugins-customhr';
 import { getPlugin as getImagemanagerPlugin } from './plugins-imagemanager';
@@ -119,6 +120,7 @@ function gatherPlugins(options) {
         'autosave',
         'lists',
         'codeeditor',
+        'mermaid',
         'media',
         'imagemanager',
         'about',
@@ -128,6 +130,7 @@ function gatherPlugins(options) {
     ];
 
     window.tinymce.PluginManager.add('codeeditor', getCodeeditorPlugin());
+    window.tinymce.PluginManager.add('mermaid', getMermaidPlugin());
     window.tinymce.PluginManager.add('customhr', getCustomhrPlugin());
     window.tinymce.PluginManager.add('imagemanager', getImagemanagerPlugin());
     window.tinymce.PluginManager.add('about', getAboutPlugin());
@@ -252,16 +255,18 @@ export function buildForEditor(options) {
         statusbar: false,
         menubar: false,
         paste_data_images: false,
-        extended_valid_elements: 'pre[*],svg[*],div[drawio-diagram],details[*],summary[*],div[*],li[class|checked|style]',
+        extended_valid_elements: 'pre[*],svg[*],style[*],g[*],defs[*],symbol[*],path[*],line[*],circle[*],tspan[*],rect[*],marker[*],text[*],div[drawio-diagram],details[*],summary[*],div[*],li[class,checked,style],span[*]',
         automatic_uploads: false,
-        custom_elements: 'doc-root,code-block',
+        custom_elements: 'doc-root,code-block,mermaid-block',
         valid_children: [
-            '-div[p|h1|h2|h3|h4|h5|h6|blockquote|code-block]',
-            '+div[pre|img]',
+            '-div[p|h1|h2|h3|h4|h5|h6|blockquote|code-block|mermaid-block]',
+            '+div[pre|img|svg]',
             '-doc-root[doc-root|#text]',
             '-li[details]',
             '+code-block[pre]',
-            '+doc-root[p|h1|h2|h3|h4|h5|h6|blockquote|code-block|div|hr]',
+            '+mermaid-block[svg]',
+            '+svg[style]',
+            '+doc-root[p|h1|h2|h3|h4|h5|h6|blockquote|code-block|mermaid-block|div|hr]',
         ].join(','),
         plugins: gatherPlugins(options),
         contextmenu: "image",
