@@ -135,7 +135,7 @@ function register(editor) {
     });
 
     editor.on('PreInit', () => {
-        mermaid.initialize({ startOnLoad: true, theme: "dark" });
+        mermaid.initialize({ startOnLoad: true, theme: "neutral" });
 
         editor.parser.addNodeFilter('svg', elms => {
             for (const el of elms) {
@@ -183,7 +183,7 @@ function postProcessSvg(svgCode, content) {
     svg = svgCode.replace('<svg', `<svg text-data="${compressedData}" width="100%"`);
 
     // Fill background color
-    svg = svg.replace('mermaidDiagram{', `mermaidDiagram{background-color:#212121;`);
+    svg = svg.replace('mermaidDiagram{', `mermaidDiagram{background-color:#FFFFFF;`);
 
     return svg;
 }
