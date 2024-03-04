@@ -235,7 +235,7 @@ class ExportFormatter
             }
         }
 
-        return $htmlContent;
+        return $this->stripFooter($htmlContent);
     }
 
     /**
@@ -339,5 +339,18 @@ class ExportFormatter
         }
 
         return trim($text);
+    }
+
+    /**
+     * @return string
+     */
+    private function stripFooter(string $html): string
+    {
+        $hr = '<hr>';
+        $div = '</div>';
+        $lastHr = strrpos($html, $hr);
+        $lastDiv = strrpos($html, $div);
+        $html = substr_replace($html, '<', $lastHr, $lastDiv - $lastHr + 1);
+        return $html;
     }
 }
