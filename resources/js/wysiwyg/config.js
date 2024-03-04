@@ -123,6 +123,7 @@ function gatherPlugins(options) {
         'mermaid',
         'media',
         'imagemanager',
+        'powerpaste',
         'about',
         'details',
         'tasklist',

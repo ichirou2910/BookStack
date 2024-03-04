@@ -24,6 +24,10 @@ export class Clipboard {
         return rtfData && rtfData.includes('\\trowd');
     }
 
+    containsApplicationData() {
+        return this.data.types.some(t => t.startsWith("application/"));
+    }
+
     /**
      * Get the images that are in the clipboard data.
      * @return {Array<File>}

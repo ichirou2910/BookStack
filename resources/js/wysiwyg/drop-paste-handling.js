@@ -35,8 +35,10 @@ async function uploadImageFile(file, pageId) {
 function paste(editor, options, event) {
     const clipboard = new Clipboard(event.clipboardData || event.dataTransfer);
 
-    // Don't handle the event ourselves if no items exist of contains table-looking data
-    if (!clipboard.hasItems() || clipboard.containsTabularData()) {
+    // console.log(clipboard.data.types);
+
+    // Don't handle the event ourselves if no items exist or contains off-scope data
+    if (!clipboard.hasItems() || clipboard.containsTabularData() || clipboard.containsApplicationData()) {
         return;
     }
 
