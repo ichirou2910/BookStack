@@ -66,7 +66,7 @@ class PageContent
      */
     protected function extractBase64ImagesFromHtml(string $htmlText, User $updater): string
     {
-        if (empty($htmlText) || !str_contains($htmlText, 'data:image ')) {
+        if (empty($htmlText) || !str_contains($htmlText, 'data:image')) {
             return $htmlText;
         }
 
