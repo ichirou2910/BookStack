@@ -30,7 +30,8 @@ class PageContent
         'circle',
         'path',
         'marker',
-        'p'
+        'p',
+        'polygon'
     ];
 
     public function __construct(
