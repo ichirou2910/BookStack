@@ -258,6 +258,7 @@ export function buildForEditor(options) {
         paste_data_images: false,
         extended_valid_elements: 'pre[*],svg[*],style[*],g[*],defs[*],symbol[*],path[*],line[*],circle[*],tspan[*],rect[*],marker[*],text[*],div[drawio-diagram],details[*],summary[*],div[*],li[class,checked,style],span[*]',
         automatic_uploads: false,
+        xss_sanitization: false,
         custom_elements: 'doc-root,code-block,mermaid-block',
         valid_children: [
             '-div[p|h1|h2|h3|h4|h5|h6|blockquote|code-block|mermaid-block]',
