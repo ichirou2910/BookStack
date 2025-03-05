@@ -119,6 +119,13 @@
   a {
     text-decoration: underline;
   }
+
+  figure figcaption {
+    color: #8a8f97;
+    display: block;
+    margin-top: 0.25rem;
+    text-align: center;
+  }
 }
 
 // This is seperated out so we can target it out-of-editor by default
