@@ -7,7 +7,7 @@ import {registerCustomIcons} from './icons';
 import {setupFilters} from './filters';
 
 import {getPlugin as getCodeeditorPlugin} from './plugin-codeeditor';
-import {getPlugin as getMermaidPlugin} from './plugin-codeeditor';
+import {getPlugin as getMermaidPlugin} from './plugin-mermaid';
 import {getPlugin as getDrawioPlugin} from './plugin-drawio';
 import {getPlugin as getCustomhrPlugin} from './plugins-customhr';
 import {getPlugin as getImagemanagerPlugin} from './plugins-imagemanager';
