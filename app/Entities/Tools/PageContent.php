@@ -24,6 +24,19 @@ class PageContent
 {
     protected PageQueries $pageQueries;
 
+    const RETAIN_ID_ELEMENTS = [
+        'svg',
+        'g',
+        'symbol',
+        'line',
+        'rect',
+        'circle',
+        'path',
+        'marker',
+        'p',
+        'polygon'
+    ];
+
     public function __construct(
         protected Page $page
     ) {
@@ -256,6 +269,12 @@ class PageContent
 
         // Stop if there's an existing valid id that has not already been used.
         $existingId = $element->getAttribute('id');
+        
+        // SVGs use ids for styling so don't replace it
+        if (in_array($element->nodeName, self::RETAIN_ID_ELEMENTS)) {
+            return ['', ''];
+        }
+
         if (str_starts_with($existingId, 'bkmrk') && !isset($idMap[$existingId])) {
             $idMap[$existingId] = true;
 
